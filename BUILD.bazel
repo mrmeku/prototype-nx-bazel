@@ -1,0 +1,47 @@
+load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+
+ng(
+    name = "build",
+    args = [
+        "build",
+        "bazel-is-cool",
+        "--outputPath=$@",
+    ],
+    data = glob(
+        [
+            "apps/bazel-is-cool/src/*",
+            "apps/bazel-is-cool/src/**",
+        ],
+        exclude = [
+            "apps/bazel-is-cool/src/**/*.spec.ts",
+            "apps/bazel-is-cool/src/test-setup.ts",
+        ],
+    ) + [
+        "angular.json",
+        "apps/bazel-is-cool/tsconfig.json",
+        "apps/bazel-is-cool/tsconfig.app.json",
+        "tsconfig.json",
+        "@npm//:node_modules",
+    ],
+    output_dir = True,
+)
+
+ng_test(
+    name = "test",
+    args = [
+        "test",
+        "bazel-is-cool",
+    ],
+    data = glob([
+        "apps/bazel-is-cool/src/*",
+        "apps/bazel-is-cool/src/**",
+    ]) + [
+        "angular.json",
+        "jest.config.js",
+        "apps/bazel-is-cool/jest.config.js",
+        "apps/bazel-is-cool/tsconfig.json",
+        "apps/bazel-is-cool/tsconfig.spec.json",
+        "tsconfig.json",
+        "@npm//:node_modules",
+    ],
+)

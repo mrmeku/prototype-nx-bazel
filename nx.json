@@ -1,0 +1,21 @@
+{
+  "npmScope": "prototype-nx-bazel",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "bazel-is-cool-e2e": {
+      "tags": []
+    },
+    "bazel-is-cool": {
+      "tags": []
+    },
+    "parent-some-cool-lib": {
+      "tags": []
+    }
+  }
+}
