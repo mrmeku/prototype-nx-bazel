@@ -1,1 +1,1 @@
-export * from './lib/parent-some-cool-lib';
+export * from './lib/pickles.module';

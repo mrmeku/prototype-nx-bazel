@@ -11,6 +11,8 @@ ng(
         [
             "apps/bazel-is-cool/src/*",
             "apps/bazel-is-cool/src/**",
+            "libs/parent/some-cool-lib/*",
+            "libs/parent/some-cool-lib/**",
         ],
         exclude = [
             "apps/bazel-is-cool/src/**/*.spec.ts",

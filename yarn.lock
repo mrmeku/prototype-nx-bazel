@@ -1206,7 +1206,7 @@
     yargs "^11.0.0"
     yargs-parser "10.0.0"
 
-"@nrwl/jest@^8.7.0":
+"@nrwl/jest@8.7.0":
   version "8.7.0"
   resolved "https://registry.yarnpkg.com/@nrwl/jest/-/jest-8.7.0.tgz#2e64b77c2a6b4bb2e9dca26d20ae2f19bc146960"
   integrity sha512-Y36ADDqqzwWdCdtNXU0vuKhc8bOCTPPDBULFZz5pUbSay/bdynveR/QyUHoFwvamovzVLJfVKRKuJWcmnkjE9Q==
@@ -1360,6 +1360,18 @@
   integrity sha512-d9p31r7Nxk0ZH0U39PTH0hiDlJ+qNVGjlt1ucOoTUptxb2v+Y5VMnsxfwN+i3hK4yQnqBi3FMmoMFcd1JHDxdg==
   dependencies:
     "@types/jasmine" "*"
+
+"@types/jest-diff@*":
+  version "20.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
+  integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
+
+"@types/jest@24.0.9":
+  version "24.0.9"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.9.tgz#74ce9cf337f25e189aa18f76ab3d65e8669b55f2"
+  integrity sha512-k3OOeevcBYLR5pdsOv5g3OP94h3mrJmLPHFEPWgbbVy2tGv0TZ/TlygiC848ogXhK8NL0I5up7YYtwpCp8xCJA==
+  dependencies:
+    "@types/jest-diff" "*"
 
 "@types/minimatch@*":
   version "3.0.3"
