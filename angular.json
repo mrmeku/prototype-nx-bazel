@@ -1,35 +1,35 @@
 {
   "version": 1,
   "projects": {
-    "bazel-is-cool": {
+    "angularapp": {
       "projectType": "application",
       "schematics": {},
-      "root": "apps/bazel-is-cool",
-      "sourceRoot": "apps/bazel-is-cool/src",
+      "root": "apps/angularapp",
+      "sourceRoot": "apps/angularapp/src",
       "prefix": "prototype-nx-bazel",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/bazel-is-cool",
-            "index": "apps/bazel-is-cool/src/index.html",
-            "main": "apps/bazel-is-cool/src/main.ts",
-            "polyfills": "apps/bazel-is-cool/src/polyfills.ts",
-            "tsConfig": "apps/bazel-is-cool/tsconfig.app.json",
+            "outputPath": "dist/apps/angularapp",
+            "index": "apps/angularapp/src/index.html",
+            "main": "apps/angularapp/src/main.ts",
+            "polyfills": "apps/angularapp/src/polyfills.ts",
+            "tsConfig": "apps/angularapp/tsconfig.app.json",
             "aot": false,
             "assets": [
-              "apps/bazel-is-cool/src/favicon.ico",
-              "apps/bazel-is-cool/src/assets"
+              "apps/angularapp/src/favicon.ico",
+              "apps/angularapp/src/assets"
             ],
-            "styles": ["apps/bazel-is-cool/src/styles.css"],
+            "styles": ["apps/angularapp/src/styles.css"],
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/bazel-is-cool/src/environments/environment.ts",
-                  "with": "apps/bazel-is-cool/src/environments/environment.prod.ts"
+                  "replace": "apps/angularapp/src/environments/environment.ts",
+                  "with": "apps/angularapp/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -59,63 +59,63 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bazel-is-cool:build"
+            "browserTarget": "angularapp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bazel-is-cool:build:production"
+              "browserTarget": "angularapp:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bazel-is-cool:build"
+            "browserTarget": "angularapp:build"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "apps/bazel-is-cool/tsconfig.app.json",
-              "apps/bazel-is-cool/tsconfig.spec.json"
+              "apps/angularapp/tsconfig.app.json",
+              "apps/angularapp/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/bazel-is-cool/**"]
+            "exclude": ["**/node_modules/**", "!apps/angularapp/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/bazel-is-cool/jest.config.js",
-            "tsConfig": "apps/bazel-is-cool/tsconfig.spec.json",
-            "setupFile": "apps/bazel-is-cool/src/test-setup.ts"
+            "jestConfig": "apps/angularapp/jest.config.js",
+            "tsConfig": "apps/angularapp/tsconfig.spec.json",
+            "setupFile": "apps/angularapp/src/test-setup.ts"
           }
         }
       }
     },
-    "bazel-is-cool-e2e": {
-      "root": "apps/bazel-is-cool-e2e",
-      "sourceRoot": "apps/bazel-is-cool-e2e/src",
+    "angularapp-e2e": {
+      "root": "apps/angularapp-e2e",
+      "sourceRoot": "apps/angularapp-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/bazel-is-cool-e2e/cypress.json",
-            "tsConfig": "apps/bazel-is-cool-e2e/tsconfig.e2e.json",
-            "devServerTarget": "bazel-is-cool:serve"
+            "cypressConfig": "apps/angularapp-e2e/cypress.json",
+            "tsConfig": "apps/angularapp-e2e/tsconfig.e2e.json",
+            "devServerTarget": "angularapp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bazel-is-cool:serve:production"
+              "devServerTarget": "angularapp:serve:production"
             }
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/bazel-is-cool-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/bazel-is-cool-e2e/**"]
+            "tsConfig": ["apps/angularapp-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/angularapp-e2e/**"]
           }
         }
       }
@@ -144,6 +144,31 @@
           }
         }
       }
+    },
+    "shared-lib": {
+      "root": "libs/shared-lib",
+      "sourceRoot": "libs/shared-lib/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-lib/tsconfig.lib.json",
+              "libs/shared-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared-lib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-lib/jest.config.js",
+            "tsConfig": "libs/shared-lib/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -158,5 +183,5 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "bazel-is-cool"
+  "defaultProject": "angularapp"
 }

@@ -1,9 +1,9 @@
 import { getGreeting } from '../support/app.po';
 
-describe('bazel-is-cool', () => {
+describe('angularapp', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
-    getGreeting().contains('Welcome to bazel-is-cool!');
+    getGreeting().contains('Welcome to angularapp!');
   });
 });

@@ -8,13 +8,16 @@
     "nx.json": "*"
   },
   "projects": {
-    "bazel-is-cool-e2e": {
+    "angularapp-e2e": {
       "tags": []
     },
-    "bazel-is-cool": {
+    "angularapp": {
       "tags": []
     },
     "parent-some-cool-lib": {
+      "tags": []
+    },
+    "shared-lib": {
       "tags": []
     }
   }

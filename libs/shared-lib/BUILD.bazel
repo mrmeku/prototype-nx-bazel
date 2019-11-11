@@ -1,62 +1,69 @@
 load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
 
-filegroup(
-    name = "srcs",
-    srcs = glob([
-        "src/**",
-    ],
-    exclude = [
-        "**/*.spec.ts",
-    ]),
+ts_library(
+    name = "shared-lib",
+    srcs = glob(
+        [
+            "**/*.ts",
+        ],
+        exclude = [
+            "**/*.spec.ts",
+        ],
+    ),
     visibility = ["//visibility:public"],
+    deps = [
+        "@npm//tslib",
+    ],
 )
 
 filegroup(
     name = "test-srcs",
     srcs = glob([
         "**/*.spec.ts",
-    ]) + [
-        ":srcs",
-    ],
-
+    ]),
 )
 
 ng_test(
     name = "test",
     args = [
         "test",
-        "parent-some-cool-lib",
+        "shared-lib",
     ],
     data = [
         "jest.config.js",
         "tsconfig.json",
         "tsconfig.spec.json",
+        ":shared-lib",
         ":test-srcs",
         "//:angular.json",
-        "//:node-modules",
+        "//:jest.config.js",
         "//:package.json",
         "//:tsconfig.json",
-        "//:jest.config.js",
+        "@npm//:node_modules",
     ],
 )
 
-ng_test(
+# NOTE: should be ng_test when linker works for nodejs_test
+ng(
     name = "lint",
     args = [
         "lint",
-        "parent-some-cool-lib",
+        "shared-lib",
     ],
     data = [
-        "tsconfig.lib.json",
         "tsconfig.json",
+        "tsconfig.lib.json",
         "tsconfig.spec.json",
         "tslint.json",
         ":test-srcs",
+        "//:angular.json",
+        "//:nx.json",
+        "//:package.json",
         "//:tsconfig.json",
         "//:tslint.json",
-        "//:nx.json",
-        "//:angular.json",
-        "//:package.json",
-        "//:node-modules",
+        "@npm//:node_modules",
     ],
+    # NOTE: remove when linker works for nodejs_test
+    output_dir = True,
 )
