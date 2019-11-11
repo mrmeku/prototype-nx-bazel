@@ -11,16 +11,3 @@ exports_files(
     ],
     visibility = ["//:__subpackages__"],
 )
-
-filegroup(
-    name = "node-modules",
-    srcs = [
-        "yarn.lock",
-        "@npm//:node_modules"
-    ] + glob([
-        "node_modules/**", # Need to add for tslint to find custom rules
-    ], exclude = [
-        "node_modules/fileset/test/**"
-    ]),
-    visibility = ["//visibility:public"],
-)

@@ -2,12 +2,14 @@ load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
 
 filegroup(
     name = "srcs",
-    srcs = glob([
-        "src/**",
-    ],
-    exclude = [
-        "**/*.spec.ts",
-    ]),
+    srcs = glob(
+        [
+            "src/**",
+        ],
+        exclude = [
+            "**/*.spec.ts",
+        ],
+    ),
 )
 
 filegroup(
@@ -23,7 +25,7 @@ ng(
     name = "build",
     args = [
         "build",
-        "bazel-is-cool",
+        "angularapp",
         "--outputPath=$@",
     ],
     data = [
@@ -32,19 +34,25 @@ ng(
         "tsconfig.json",
         ":srcs",
         "//:angular.json",
-        "//:node-modules",
         "//:package.json",
         "//:tsconfig.json",
-        "//libs/parent/some-cool-lib:srcs",
+        "//libs/shared-lib",
+        # NOTE: Using @npm//:node_modules fails here. Seems to not include all transitive dependencies
+        # "@npm//:node_modules",
+        "@npm//@angular/core",
+        "@npm//@angular/router",
+        "@npm//@angular/platform-browser-dynamic",
+        "@npm//@angular-devkit/build-angular",
     ],
     output_dir = True,
 )
 
+# NOTE: This won't work without upstream changes to rules_nodejs
 ng_test(
     name = "test",
     args = [
         "test",
-        "bazel-is-cool",
+        "angularapp",
     ],
     data = [
         "jest.config.js",
@@ -52,19 +60,19 @@ ng_test(
         "tsconfig.spec.json",
         ":test-srcs",
         "//:angular.json",
-        "//:node-modules",
+        "//:jest.config.js",
         "//:package.json",
         "//:tsconfig.json",
-        "//:jest.config.js",
-        "//libs/parent/some-cool-lib:srcs",
+        "@npm//:node_modules",
     ],
 )
 
-ng_test(
+# NOTE: should be ng_test when linker works for nodejs_test
+ng(
     name = "lint",
     args = [
         "lint",
-        "bazel-is-cool",
+        "angularapp",
     ],
     data = [
         "tsconfig.app.json",
@@ -73,11 +81,12 @@ ng_test(
         "tslint.json",
         ":test-srcs",
         "//:angular.json",
-        "//:node-modules",
         "//:nx.json",
         "//:package.json",
         "//:tsconfig.json",
         "//:tslint.json",
-        "//libs/parent/some-cool-lib:srcs",
+        "@npm//:node_modules",
     ],
+    # NOTE: remove when linker works for nodejs_test
+    output_dir = True,
 )

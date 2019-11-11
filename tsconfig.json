@@ -18,7 +18,8 @@
     "paths": {
       "@prototype-nx-bazel/parent/some-cool-lib": [
         "libs/parent/some-cool-lib/src/index.ts"
-      ]
+      ],
+      "@prototype-nx-bazel/shared-lib": ["libs/shared-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
