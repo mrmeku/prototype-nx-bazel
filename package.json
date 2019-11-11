@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "bazel build :build",
+    "build": "bazel build apps/bazel-is-cool:build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "bazel test apps/bazel-is-cool:lint && bazel test libs/parent/some-cool-lib:lint",
     "e2e": "ng e2e",
     "postinstall": "patch-package && ngcc --properties es2015 browser module main --first-only"
   },

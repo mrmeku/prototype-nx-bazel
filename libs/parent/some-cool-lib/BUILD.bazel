@@ -1,0 +1,62 @@
+load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+
+filegroup(
+    name = "srcs",
+    srcs = glob([
+        "src/**",
+    ],
+    exclude = [
+        "**/*.spec.ts",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "test-srcs",
+    srcs = glob([
+        "**/*.spec.ts",
+    ]) + [
+        ":srcs",
+    ],
+
+)
+
+ng_test(
+    name = "test",
+    args = [
+        "test",
+        "parent-some-cool-lib",
+    ],
+    data = [
+        "jest.config.js",
+        "tsconfig.json",
+        "tsconfig.spec.json",
+        ":test-srcs",
+        "//:angular.json",
+        "//:node-modules",
+        "//:package.json",
+        "//:tsconfig.json",
+        "//:jest.config.js",
+    ],
+)
+
+ng_test(
+    name = "lint",
+    args = [
+        "lint",
+        "parent-some-cool-lib",
+    ],
+    data = [
+        "tsconfig.lib.json",
+        "tsconfig.json",
+        "tsconfig.spec.json",
+        "tslint.json",
+        ":test-srcs",
+        "//:tsconfig.json",
+        "//:tslint.json",
+        "//:nx.json",
+        "//:angular.json",
+        "//:package.json",
+        "//:node-modules",
+    ],
+)

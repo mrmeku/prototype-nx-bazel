@@ -1,0 +1,83 @@
+load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+
+filegroup(
+    name = "srcs",
+    srcs = glob([
+        "src/**",
+    ],
+    exclude = [
+        "**/*.spec.ts",
+    ]),
+)
+
+filegroup(
+    name = "test-srcs",
+    srcs = glob([
+        "**/*.spec.ts",
+    ]) + [
+        ":srcs",
+    ],
+)
+
+ng(
+    name = "build",
+    args = [
+        "build",
+        "bazel-is-cool",
+        "--outputPath=$@",
+    ],
+    data = [
+        "browserslist",
+        "tsconfig.app.json",
+        "tsconfig.json",
+        ":srcs",
+        "//:angular.json",
+        "//:node-modules",
+        "//:package.json",
+        "//:tsconfig.json",
+        "//libs/parent/some-cool-lib:srcs",
+    ],
+    output_dir = True,
+)
+
+ng_test(
+    name = "test",
+    args = [
+        "test",
+        "bazel-is-cool",
+    ],
+    data = [
+        "jest.config.js",
+        "tsconfig.json",
+        "tsconfig.spec.json",
+        ":test-srcs",
+        "//:angular.json",
+        "//:node-modules",
+        "//:package.json",
+        "//:tsconfig.json",
+        "//:jest.config.js",
+        "//libs/parent/some-cool-lib:srcs",
+    ],
+)
+
+ng_test(
+    name = "lint",
+    args = [
+        "lint",
+        "bazel-is-cool",
+    ],
+    data = [
+        "tsconfig.app.json",
+        "tsconfig.json",
+        "tsconfig.spec.json",
+        "tslint.json",
+        ":test-srcs",
+        "//:angular.json",
+        "//:node-modules",
+        "//:nx.json",
+        "//:package.json",
+        "//:tsconfig.json",
+        "//:tslint.json",
+        "//libs/parent/some-cool-lib:srcs",
+    ],
+)

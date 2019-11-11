@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'pickles',
+  selector: 'app-pickles',
   templateUrl: './pickles.component.html',
   styleUrls: ['./pickles.component.css']
 })
