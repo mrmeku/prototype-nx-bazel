@@ -169,6 +169,33 @@
           }
         }
       }
+    },
+    "shared-buildable-lib": {
+      "projectType": "library",
+      "root": "libs/shared-buildable-lib",
+      "sourceRoot": "libs/shared-buildable-lib/src",
+      "prefix": "prototype-nx-bazel",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared-buildable-lib/tsconfig.lib.json",
+            "project": "libs/shared-buildable-lib/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/shared-buildable-lib/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared-buildable-lib/**"]
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
