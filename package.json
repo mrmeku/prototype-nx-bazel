@@ -21,7 +21,6 @@
     "@angular/platform-browser": "next",
     "@angular/platform-browser-dynamic": "next",
     "@angular/router": "next",
-    "@bazel/typescript": "^0.39.1",
     "@nrwl/angular": "^8.7.1",
     "@nrwl/workspace": "^8.7.0",
     "core-js": "^3.4.0",
