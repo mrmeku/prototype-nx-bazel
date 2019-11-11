@@ -19,6 +19,9 @@
     },
     "shared-lib": {
       "tags": []
+    },
+    "shared-buildable-lib": {
+      "tags": []
     }
   }
 }

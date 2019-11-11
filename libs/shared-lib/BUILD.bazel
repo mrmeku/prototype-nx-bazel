@@ -1,20 +1,14 @@
 load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
-load("@npm_bazel_typescript//:index.bzl", "ts_library")
 
-ts_library(
+filegroup(
     name = "shared-lib",
     srcs = glob(
         [
             "**/*.ts",
         ],
-        exclude = [
-            "**/*.spec.ts",
-        ],
+        exclude = ["**/*.spec.ts"],
     ),
     visibility = ["//visibility:public"],
-    deps = [
-        "@npm//tslib",
-    ],
 )
 
 filegroup(
