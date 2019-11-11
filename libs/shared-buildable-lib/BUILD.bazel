@@ -6,7 +6,9 @@ filegroup(
         [
             "**/*.ts",
         ],
-        exclude = ["**/*.spec.ts"],
+        exclude = [
+            "**/*.spec.ts",
+        ],
     ),
     visibility = ["//visibility:public"],
 )

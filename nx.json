@@ -14,13 +14,16 @@
     "angularapp": {
       "tags": []
     },
-    "parent-some-cool-lib": {
-      "tags": []
-    },
     "shared-lib": {
       "tags": []
     },
     "shared-buildable-lib": {
+      "tags": []
+    },
+    "reactapp": {
+      "tags": []
+    },
+    "reactapp-e2e": {
       "tags": []
     }
   }
