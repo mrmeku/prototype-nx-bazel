@@ -1,49 +1,26 @@
 load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
 
-ng(
-    name = "build",
-    args = [
-        "build",
-        "bazel-is-cool",
-        "--outputPath=$@",
-    ],
-    data = glob(
-        [
-            "apps/bazel-is-cool/src/*",
-            "apps/bazel-is-cool/src/**",
-            "libs/parent/some-cool-lib/*",
-            "libs/parent/some-cool-lib/**",
-        ],
-        exclude = [
-            "apps/bazel-is-cool/src/**/*.spec.ts",
-            "apps/bazel-is-cool/src/test-setup.ts",
-        ],
-    ) + [
-        "angular.json",
-        "apps/bazel-is-cool/tsconfig.json",
-        "apps/bazel-is-cool/tsconfig.app.json",
+exports_files(
+    [
         "tsconfig.json",
-        "@npm//:node_modules",
+        "tslint.json",
+        "package.json",
+        "angular.json",
+        "nx.json",
+        "jest.config.js",
     ],
-    output_dir = True,
+    visibility = ["//:__subpackages__"],
 )
 
-ng_test(
-    name = "test",
-    args = [
-        "test",
-        "bazel-is-cool",
-    ],
-    data = glob([
-        "apps/bazel-is-cool/src/*",
-        "apps/bazel-is-cool/src/**",
-    ]) + [
-        "angular.json",
-        "jest.config.js",
-        "apps/bazel-is-cool/jest.config.js",
-        "apps/bazel-is-cool/tsconfig.json",
-        "apps/bazel-is-cool/tsconfig.spec.json",
-        "tsconfig.json",
-        "@npm//:node_modules",
-    ],
+filegroup(
+    name = "node-modules",
+    srcs = [
+        "yarn.lock",
+        "@npm//:node_modules"
+    ] + glob([
+        "node_modules/**", # Need to add for tslint to find custom rules
+    ], exclude = [
+        "node_modules/fileset/test/**"
+    ]),
+    visibility = ["//visibility:public"],
 )
