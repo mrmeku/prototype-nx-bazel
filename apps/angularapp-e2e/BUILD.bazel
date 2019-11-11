@@ -1,41 +1,26 @@
 load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
 
 filegroup(
-    name = "shared-lib",
-    srcs = glob(
-        [
-            "**/*.ts",
-        ],
-        exclude = [
-            "**/*.spec.ts",
-        ],
-    ),
-    visibility = ["//visibility:public"],
-)
-
-filegroup(
-    name = "test-srcs",
+    name = "angularapp-e2e",
     srcs = glob([
         "**/*.spec.ts",
     ]),
 )
 
 ng_test(
-    name = "test",
+    name = "e2e",
     args = [
-        "test",
-        "shared-lib",
+        "e2e",
+        "angularapp-e2e",
     ],
     data = [
-        "jest.config.js",
+        "tsconfig.e2e.json",
         "tsconfig.json",
-        "tsconfig.spec.json",
-        ":shared-lib",
-        ":test-srcs",
+        ":angularapp-e2e",
         "//:angular.json",
-        "//:jest.config.js",
         "//:package.json",
         "//:tsconfig.json",
+        "//apps/angularapp",
         "@npm//:node_modules",
     ],
 )
@@ -45,14 +30,13 @@ ng(
     name = "lint",
     args = [
         "lint",
-        "shared-lib",
+        "angularapp-e2e",
     ],
     data = [
+        "tsconfig.e2e.json",
         "tsconfig.json",
-        "tsconfig.lib.json",
-        "tsconfig.spec.json",
         "tslint.json",
-        ":test-srcs",
+        ":angularapp-e2e",
         "//:angular.json",
         "//:nx.json",
         "//:package.json",

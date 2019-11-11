@@ -1,15 +1,17 @@
 load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
 
 filegroup(
-    name = "srcs",
+    name = "angularapp",
     srcs = glob(
         [
             "src/**",
         ],
         exclude = [
+            "src/test-setup.ts",
             "**/*.spec.ts",
         ],
     ),
+    visibility = ["//visibility:public"],
 )
 
 filegroup(
@@ -17,7 +19,7 @@ filegroup(
     srcs = glob([
         "**/*.spec.ts",
     ]) + [
-        ":srcs",
+        ":angularapp",
     ],
 )
 
@@ -32,11 +34,10 @@ ng(
         "browserslist",
         "tsconfig.app.json",
         "tsconfig.json",
-        ":srcs",
+        ":angularapp",
         "//:angular.json",
         "//:package.json",
         "//:tsconfig.json",
-        "//libs/shared-buildable-lib",
         "//libs/shared-lib",
         "@npm//:node_modules",
     ],
@@ -52,6 +53,7 @@ ng_test(
     ],
     data = [
         "jest.config.js",
+        "src/test-setup.ts",
         "tsconfig.json",
         "tsconfig.spec.json",
         ":test-srcs",
