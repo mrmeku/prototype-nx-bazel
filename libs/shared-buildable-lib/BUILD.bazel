@@ -1,4 +1,4 @@
-load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+load("@npm//@nrwl/cli:index.bzl", "nx")
 
 filegroup(
     name = "shared-buildable-lib",
@@ -21,7 +21,7 @@ filegroup(
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-ng(
+nx(
     name = "lint",
     args = [
         "lint",
@@ -47,7 +47,7 @@ ng(
 #
 # NOTE: Results in ERROR: EPERM: operation not permitted, open 'execroot/prototype_nx_bazel/node_modules/tslib/package.json'
 # An unhandled exception occurred: EPERM: operation not permitted, open 'execroot/prototype_nx_bazel/node_modules/tslib/package.json'
-ng(
+nx(
     name = "build",
     args = [
         "build",

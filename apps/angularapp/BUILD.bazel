@@ -1,4 +1,4 @@
-load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
 
 filegroup(
     name = "angularapp",
@@ -23,7 +23,7 @@ filegroup(
     ],
 )
 
-ng(
+nx(
     name = "build",
     args = [
         "build",
@@ -46,7 +46,7 @@ ng(
 )
 
 # NOTE: This won't work without upstream changes to rules_nodejs
-ng_test(
+nx_test(
     name = "test",
     args = [
         "test",
@@ -67,7 +67,7 @@ ng_test(
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-ng(
+nx(
     name = "lint",
     args = [
         "lint",
