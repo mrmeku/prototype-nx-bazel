@@ -293,13 +293,6 @@
         "style": "scss",
         "linter": "tslint",
         "babel": true
-      },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "tslint"
       }
     }
   },
