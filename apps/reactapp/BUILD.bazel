@@ -1,4 +1,4 @@
-load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
 
 filegroup(
     name = "reactapp",
@@ -23,7 +23,7 @@ filegroup(
 )
 
 # NOTE: This command just spins forever. It appears that @nrwl/web:build has a bug.
-ng(
+nx(
     name = "build",
     args = [
         "build",
@@ -40,13 +40,23 @@ ng(
         "//:tsconfig.json",
         "//libs/shared-buildable-lib",
         "//libs/shared-lib",
-        "@npm//:node_modules",
+        "@npm//@angular/cli",
+        "@npm//@babel/preset-react",
+        "@npm//@nrwl/react",
+        "@npm//@nrwl/web",
+        "@npm//@nrwl/workspace",
+        "@npm//core-js",
+        "@npm//document-register-element",
+        "@npm//inquirer",
+        "@npm//react",
+        "@npm//react-dom",
+        "@npm//regenerator-runtime",
     ],
     output_dir = True,
 )
 
 # NOTE: This won't work without upstream changes to rules_nodejs
-ng_test(
+nx_test(
     name = "test",
     args = [
         "test",
@@ -66,7 +76,7 @@ ng_test(
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-ng(
+nx(
     name = "lint",
     args = [
         "lint",
