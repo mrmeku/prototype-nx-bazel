@@ -29,7 +29,7 @@ The goal of this repo is to put together an example Nx workspace with the follow
 - `bazel build apps/shared:test-lib` ❌
 - `bazel test libs/shared-lib:test` ❌
 - `bazel test libs/shared-buildable-lib:test` ❌
-- `bazel build libs/shared-buildable-lib:build` ❌
+- `bazel build libs/shared-buildable-lib:build` ✅ (Need CLI changes to mac OS independent)
 - `bazel build apps/reactapp:lint` ✅
 - `bazel build apps/angularapp:lint` ✅
 - `bazel build libs/shared-lib:lint` ✅
