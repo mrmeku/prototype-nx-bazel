@@ -1,4 +1,4 @@
-load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
 
 filegroup(
     name = "reactapp-e2e",
@@ -7,7 +7,7 @@ filegroup(
     ]),
 )
 
-ng_test(
+nx_test(
     name = "e2e",
     args = [
         "e2e",
@@ -26,7 +26,7 @@ ng_test(
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-ng(
+nx(
     name = "lint",
     args = [
         "lint",
