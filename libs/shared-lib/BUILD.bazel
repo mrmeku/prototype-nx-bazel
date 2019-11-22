@@ -1,5 +1,3 @@
-load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
-
 filegroup(
     name = "shared-lib",
     srcs = glob(
@@ -20,46 +18,46 @@ filegroup(
     ]),
 )
 
-nx_test(
-    name = "test",
-    args = [
-        "test",
-        "shared-lib",
-    ],
-    data = [
-        "jest.config.js",
-        "tsconfig.json",
-        "tsconfig.spec.json",
-        ":shared-lib",
-        ":test-srcs",
-        "//:angular.json",
-        "//:jest.config.js",
-        "//:package.json",
-        "//:tsconfig.json",
-        "@npm//:node_modules",
-    ],
-)
+# nx_test(
+#     name = "test",
+#     args = [
+#         "test",
+#         "shared-lib",
+#     ],
+#     data = [
+#         "jest.config.js",
+#         "tsconfig.json",
+#         "tsconfig.spec.json",
+#         ":shared-lib",
+#         ":test-srcs",
+#         "//:angular.json",
+#         "//:jest.config.js",
+#         "//:package.json",
+#         "//:tsconfig.json",
+#         "@npm//:node_modules",
+#     ],
+# )
 
-# NOTE: should be ng_test when linker works for nodejs_test
-nx(
-    name = "lint",
-    args = [
-        "lint",
-        "shared-lib",
-    ],
-    data = [
-        "tsconfig.json",
-        "tsconfig.lib.json",
-        "tsconfig.spec.json",
-        "tslint.json",
-        ":test-srcs",
-        "//:angular.json",
-        "//:nx.json",
-        "//:package.json",
-        "//:tsconfig.json",
-        "//:tslint.json",
-        "@npm//:node_modules",
-    ],
-    # NOTE: remove when linker works for nodejs_test
-    output_dir = True,
-)
+# # NOTE: should be ng_test when linker works for nodejs_test
+# nx(
+#     name = "lint",
+#     args = [
+#         "lint",
+#         "shared-lib",
+#     ],
+#     data = [
+#         "tsconfig.json",
+#         "tsconfig.lib.json",
+#         "tsconfig.spec.json",
+#         "tslint.json",
+#         ":test-srcs",
+#         "//:angular.json",
+#         "//:nx.json",
+#         "//:package.json",
+#         "//:tsconfig.json",
+#         "//:tslint.json",
+#         "@npm//:node_modules",
+#     ],
+#     # NOTE: remove when linker works for nodejs_test
+#     output_dir = True,
+# )

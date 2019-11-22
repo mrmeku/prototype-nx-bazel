@@ -1,4 +1,4 @@
-load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
+load("//:defs.bzl", "ng", "ng_test")
 
 filegroup(
     name = "angularapp",
@@ -23,12 +23,11 @@ filegroup(
     ],
 )
 
-nx(
+ng(
     name = "build",
     args = [
         "build",
         "angularapp",
-        "--outputPath=$@",
     ],
     data = [
         "browserslist",
@@ -40,21 +39,11 @@ nx(
         "//:tsconfig.json",
         "//libs/shared-buildable-lib",
         "//libs/shared-lib",
-        # NOTE: Use @npm//node_modules causes bundling to fail due to Babel errors.
-        "@npm//@angular-devkit/build-angular",
-        "@npm//@angular/cli",
-        "@npm//@angular/core",
-        "@npm//@angular/platform-browser-dynamic",
-        "@npm//@angular/router",
-        "@npm//@babel/preset-env",
-        "@npm//@nrwl/workspace",
-        "@npm//inquirer",
     ],
-    output_dir = True,
 )
 
 # NOTE: This won't work without upstream changes to rules_nodejs
-nx_test(
+ng_test(
     name = "test",
     args = [
         "test",
@@ -70,12 +59,11 @@ nx_test(
         "//:jest.config.js",
         "//:package.json",
         "//:tsconfig.json",
-        "@npm//:node_modules",
     ],
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-nx(
+ng_test(
     name = "lint",
     args = [
         "lint",
@@ -92,8 +80,5 @@ nx(
         "//:package.json",
         "//:tsconfig.json",
         "//:tslint.json",
-        "@npm//:node_modules",
     ],
-    # NOTE: remove when linker works for nodejs_test
-    output_dir = True,
 )

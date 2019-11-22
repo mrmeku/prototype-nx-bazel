@@ -16,23 +16,29 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "f4af7084f18419832bf3fcfecca29af7a3cbceccac43e80fd1bba13b94764efd",
-    urls = ["https://github.com/alexeagle/rules_nodejs/releases/download/0.40.0-beta/release.tar.gz"],
+    sha256 = "9901bc17138a79135048fb0c107ee7a56e91815ec6594c08cb9a17b80276d62b",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/0.40.0/rules_nodejs-0.40.0.tar.gz"],
 )
 
-# The yarn_install rule runs yarn anytime the package.json or yarn.lock file changes.
-# It also extracts and installs any Bazel rules distributed in an npm package.
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+load("@build_bazel_rules_nodejs//:package.bzl", "rules_nodejs_dev_dependencies")
 
-yarn_install(
-    # Name this npm so that Bazel Label references look like @npm//package
-    name = "npm",
-    data = ["//patches"],
-    package_json = "//:package.json",
-    yarn_lock = "//:yarn.lock",
+rules_nodejs_dev_dependencies()
+
+# Install a hermetic version of node.
+# After this is run, these labels will be available:
+# - NodeJS:
+#   @nodejs//:node
+# - NPM:
+#   @nodejs//:npm_node_repositories
+# - The yarn package manager:
+#   @nodejs//:yarn_node_repositories
+#
+# To install the node_modules of all the listed package_json files run:
+#   bazel run @nodejs//:yarn_node_repositories
+# or
+#   bazel run @nodejs//:npm_node_repositories
+load("@build_bazel_rules_nodejs//:index.bzl", "node_repositories")
+
+node_repositories(
+    package_json = ["//:package.json"],
 )
-
-# Install any Bazel rules which were extracted earlier by the yarn_install rule.
-load("@npm//:install_bazel_dependencies.bzl", "install_bazel_dependencies")
-
-install_bazel_dependencies()
