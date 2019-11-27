@@ -1,4 +1,4 @@
-load("@npm//@nrwl/cli:index.bzl", "nx")
+load("@npm//@angular/cli:index.bzl", "ng")
 
 filegroup(
     name = "angularapp",
@@ -23,12 +23,12 @@ filegroup(
     ],
 )
 
-nx(
+ng(
     name = "build",
     args = [
         "build",
         "angularapp",
-        "--outputPath=$@",
+        "--outputPath=$(@D)",
     ],
     data = [
         "browserslist",
@@ -45,8 +45,7 @@ nx(
     output_dir = True,
 )
 
-# NOTE: This won't work without upstream changes to rules_nodejs
-nx(
+ng(
     name = "test",
     args = [
         "test",
@@ -68,7 +67,7 @@ nx(
 )
 
 # NOTE: should be ng_test when linker works for nodejs_test
-nx(
+ng(
     name = "lint",
     args = [
         "lint",
