@@ -1,4 +1,5 @@
-load("@npm//@angular/cli:index.bzl", "ng", "ng_test")
+# All rules in other repositories can use these targets
+package(default_visibility = ["//visibility:public"])
 
 exports_files(
     [
@@ -9,5 +10,23 @@ exports_files(
         "nx.json",
         "jest.config.js",
     ],
-    visibility = ["//:__subpackages__"],
+)
+
+filegroup(
+    name = "node_modules",
+    srcs = glob(
+        [
+            "node_modules/**/*",
+        ],
+    ),
+)
+
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+# Wire up the `bin` entry `ng`
+nodejs_binary(
+    name = "nx",
+    data = ["//:node_modules"],
+    entry_point = "//:node_modules/@nrwl/cli/bin/nx.js",
+    install_source_map_support = False,
 )

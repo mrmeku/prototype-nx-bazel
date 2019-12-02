@@ -1,4 +1,4 @@
-load("@npm//@nrwl/cli:index.bzl", "nx", "nx_test")
+load("//:nx.bzl", "nx", "nx_test")
 
 filegroup(
     name = "shared-lib",

@@ -8,9 +8,6 @@
     "nx.json": "*"
   },
   "projects": {
-    "angularapp-e2e": {
-      "tags": []
-    },
     "angularapp": {
       "tags": []
     },
@@ -18,12 +15,6 @@
       "tags": []
     },
     "shared-buildable-lib": {
-      "tags": []
-    },
-    "reactapp": {
-      "tags": []
-    },
-    "reactapp-e2e": {
       "tags": []
     }
   }
