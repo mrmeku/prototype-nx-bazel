@@ -1,0 +1,47 @@
+package(default_visibility = ["//:__subpackages__"])
+
+exports_files(
+    [
+        ".editorconfig",
+        ".gitignore",
+        ".prettierignore",
+        ".prettierrc",
+        "README.md",
+        "angular.json",
+        "jest.config.js",
+        "nx.json",
+        "package.json",
+        "tsconfig.json",
+        "tslint.json",
+        "yarn.lock",
+        
+    ],
+)
+
+filegroup(
+    name = "node_modules",
+    srcs = glob(
+        [
+            "node_modules/**/*.js",
+            "node_modules/**/*.d.ts",
+            "node_modules/**/*.json",
+            "node_modules/**/*.css",
+            "node_modules/**/*.scss",
+            "node_modules/**/*.md",
+        ],
+        exclude = [
+            "node_modules/**/test/**",
+            "node_modules/**/coverage/**",
+        ],
+    ),
+)
+
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_binary")
+
+# Wire up nx as a bazel executable
+nodejs_binary(
+    name = "nx",
+    data = ["//:node_modules"],
+    entry_point = "//:node_modules/@nrwl/cli/bin/nx.js",
+    install_source_map_support = False,
+)
