@@ -51,7 +51,7 @@ nx_test(
 )
 
 nx_test(
-    name = "test-with-nodejs-test",
+    name = "test",
     args = [
         "test",
         "cart",
@@ -66,23 +66,4 @@ nx_test(
         "//:jest.config.js",
         "@npm//:node_modules",
     ],
-)
-
-nx(
-    name = "test-with-npm-package-bin",
-    args = [
-        "test",
-        "cart",
-    ],
-    data = [
-        ":cart",
-        # Root Files
-        "//:angular.json",
-        "//:nx.json",
-        "//:package.json",
-        "//:tsconfig.json",
-        "//:jest.config.js",
-        "@npm//:node_modules",
-    ],
-    output_dir = True,
 )

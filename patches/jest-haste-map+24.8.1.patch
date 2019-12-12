@@ -1,0 +1,16 @@
+diff --git a/node_modules/jest-haste-map/build/crawlers/node.js b/node_modules/jest-haste-map/build/crawlers/node.js
+index 23985ae..7c9b9f2 100644
+--- a/node_modules/jest-haste-map/build/crawlers/node.js
++++ b/node_modules/jest-haste-map/build/crawlers/node.js
+@@ -258,10 +258,6 @@ module.exports = function nodeCrawl(options) {
+       });
+     };
+ 
+-    if (forceNodeFilesystemAPI || process.platform === 'win32') {
+-      find(roots, extensions, ignore, callback);
+-    } else {
+-      findNative(roots, extensions, ignore, callback);
+-    }
++    find(roots, extensions, ignore, callback);
+   });
+ };
